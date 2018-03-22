@@ -48,7 +48,9 @@ class News extends Component{
 
     		// let state= p.isChecked 
     		// let provider= p.isChecked = ! p.isChecked
-    		ReactTestUtils.Simulate.change(this.refs[cb],{"target": {"checked": true}});
+    		// ReactTestUtils.Simulate.change(this.refs[cb],{"target": {"checked": true}});
+    		ReactTestUtils.Simulate.change(this.refs[cb],{"checked": para});
+
 
     	})
     	// this.setState({providers})
@@ -139,11 +141,11 @@ class News extends Component{
                 <div key={key} id={item.id} className="item-container">
                    <div className="row">
                      
-                     <div className="col-md-5" ><img className="img-responsive square"  scr={item.imageurl} /> </div>
+                     <div className="col-md-5" ><img className="img-responsive square"  src={item.imageurl} /> </div>
                      <div className="col-md-4">
                        <a className="no-decoration" href={item.url}><h6>{item.title}</h6></a> 
-                       <p className="shortened">{item.body}</p>
-                       <span className="blue">{item.source}</span>
+                       <p className="shortened">{item.body.substring(0, 70)+'...'}<a className="no-decoration" href={item.url}>read more</a></p>
+                       <span className="blue"><label className="dark">Source:</label> {item.source}</span>
                      </div>
                    </div>
                 </div>

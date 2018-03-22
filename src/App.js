@@ -17,16 +17,19 @@ import './tabs.css'
 import './layout.css'
 // const News = require('./News');
 import News from './News';
-
+import Prices from './Prices';
 class App extends Component {
 
   constructor(){
     super()
     this.state={
-       shouldUpdateNews:false, news:[]
+       shouldUpdateNews:false, shouldUpdatePrices: false, news:[]
     }
+
     this.ToggleShouldUpdateNews=this.ToggleShouldUpdateNews.bind(this)
     this.updateNews=this.updateNews.bind(this)
+
+    this.ToggleShouldUpdatePrices=this.ToggleShouldUpdatePrices.bind(this)
   }
 
   ToggleShouldUpdateNews(){
@@ -39,6 +42,12 @@ class App extends Component {
       news
     })
   }
+
+  ToggleShouldUpdatePrices(){
+    this.setState({
+      shouldUpdatePrices: !this.state.shouldUpdatePrices
+    })
+  }
   render() {
     return (
       <div className="App">
@@ -48,9 +57,9 @@ class App extends Component {
         </header>
         
 
-          <Tabs className="tabs tabs-1"
-             
-
+          <Tabs 
+            className="tabs tabs-1"  
+            renderActiveTabContentOnly={true}
 
 
           >
@@ -66,8 +75,10 @@ class App extends Component {
                     <News news={this.state.news} updateNews={this.updateNews} status={this.state.shouldUpdateNews} toggleStatus={this.ToggleShouldUpdateNews} />
                 </TabContent>
                 <TabContent for="tab2">
-                    <h2>Tab2 content</h2>
-                    <div>¯\_(ツ)_/¯</div>
+                    <Prices                       
+                      status={this.state.shouldUpdatePrices} 
+                      toggleStatus={this.ToggleShouldUpdatePrices}
+                    />
                 </TabContent>
                 <TabContent for="tab3">
                     <h2>Tab3 content</h2>

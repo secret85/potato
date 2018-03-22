@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 // import ReactDOM from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
 
-class News extends Component{
+class Prices extends Component{
     constructor(props){
 
       super(props)
@@ -169,4 +169,4 @@ class News extends Component{
 
 }
 
-export default News;
+export default Prices;

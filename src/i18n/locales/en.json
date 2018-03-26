@@ -1,20 +1,20 @@
 {   
 	"tabs": {
 		"titles": {
-			"tab1": "News",
+			"tab1": "Charts",
 			"tab2": "Prices",
 			"tab3": "Exchanges",
-			"tab4": "Charts"
+			"tab4": "News"
 		},
 		"tab2": {
 				"btclp": "BTC live prices","ethlp": "ETH live prices"
 			},
 
-		"tab4": {
+		"tab1": {
 				"select": "Select a pair"
 			},
 
-	    "tab1":{
+	    "tab4":{
            "toggleCheck":"Check/Uncheck all","readmore":"read more"
 	    }
 		

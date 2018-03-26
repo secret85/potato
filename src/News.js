@@ -29,12 +29,9 @@ class News extends Component{
 	      	nextProps.status==true? this.getNews(this.state.providers.map((p,i)=>p.isChecked? p.key: '')) : null
 	      }
 	    if(nextProps.news !== this.state.news){
-	    	console.log(nextProps.news[0])
-	    	console.log(nextProps.status)
 
 	      	this.setState({news:nextProps.news})
-            // alert(nextProps.status)
-	      	// nextProps.status==true? this.getNews(this.state.providers.map((p,i)=>p.key)) : null
+
 	      }
     }
   componentDidMount(){ 
@@ -81,9 +78,17 @@ class News extends Component{
               })
 
     }
+    noEmpty(arr){
+      let bool=false;
+         for(var i=0;i<arr.length;i++){
+             if(arr[i] !== "")   
+                return true;
+         }
+   return bool;
+
+    }
     getNews(feeds){
-      console.log('feeds',feeds)
-      if(feeds =="all" || feeds[0]!==""){
+      if(feeds =="all" || this.noEmpty(feeds)){
     	  let url=""
     	  feeds=="all"? url="https://min-api.cryptocompare.com/data/news/?lang=EN" : url=`https://min-api.cryptocompare.com/data/news/?feeds=${feeds.join(',')}`
         let app=this;

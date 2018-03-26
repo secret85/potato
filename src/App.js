@@ -32,6 +32,7 @@ class App extends Component {
     super(props)
 
      this.i18n= new i18n_();
+     this.startDate=Date.now()
 
     this.state={
        i18n:this.i18n,
@@ -50,7 +51,18 @@ class App extends Component {
 
     this.toggleLogger=this.toggleLogger.bind(this)
     this.setLocale=this.setLocale.bind(this)
+    this.tick=this.tick.bind(this)
+    setInterval(this.tick,20)
+
+
   }
+
+
+  tick(){
+
+              this.setState({elapsed: Date.now() - this.startDate})
+     }
+
 
   toggleLogger(e){
     
@@ -131,7 +143,7 @@ class App extends Component {
 
            <div className="col-md-8 " >
             <div style={{display:this.state.loggerIsShown}}>
-              <Logger i18n={this.state.i18n} ref={"logger"} start={Date.now()}/>
+              <Logger i18n={this.state.i18n} ref={"logger"} elapsed={this.state.elapsed} />
             </div>
            </div>
           </div>
@@ -157,11 +169,7 @@ class App extends Component {
 
             <div className="content" style={{height:'auto',width:'100%'}}>
                 <TabContent for="tab1"  >
-                    <News 
-                     i18n={this.state.i18n}
-                     logger={this.refs.logger}
-                     news={this.state.news} updateNews={this.updateNews} status={this.state.shouldUpdateNews}
-                     toggleStatus={this.ToggleShouldUpdateNews} />
+                  <Chart i18n={this.state.i18n} />
                 </TabContent>
                 <TabContent for="tab2">
                     <Prices     
@@ -182,7 +190,12 @@ class App extends Component {
                     />
                 </TabContent>
                   <TabContent for="tab4">
-                    <Chart i18n={this.state.i18n} />
+                    
+                    <News 
+                     i18n={this.state.i18n}
+                     logger={this.refs.logger}
+                     news={this.state.news} updateNews={this.updateNews} status={this.state.shouldUpdateNews}
+                     toggleStatus={this.ToggleShouldUpdateNews} />
                 </TabContent>
             </div>
           </Tabs>

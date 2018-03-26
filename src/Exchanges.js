@@ -53,7 +53,6 @@ class Exchanges extends Component{
     getExchanges(currency1,currency2){ 
 	    	let url=`https://min-api.cryptocompare.com/data/top/exchanges?fsym=${currency1}&tsym=${currency2}`
 	        let app=this;
-	        console.log(url)
 	        fetch(url) 
 	        .then(  
 	            function(mixture) {mixture.json().then(function(Ex){

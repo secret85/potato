@@ -7,35 +7,26 @@ class Logger extends Component{
 
       this.state={
         // data:[],options:[] status:this.props.status
-        elapsed:0,success:10,failures:0,i18n:this.props.i18n,
+        elapsed:this.props.elapsed,success:10,failures:0,i18n:this.props.i18n,
         apiCalls:[{src:"App",status:"preparing",description:"..."}],ipLimits:{CallsLeft:{}},
         Currencies:{}
 
       }
-      this.tick=this.tick.bind(this)
       this.addFailure=this.addFailure.bind(this)
       this.addSuccess=this.addSuccess.bind(this)
       this.updateIpLimits=this.updateIpLimits.bind(this)
       // this.startSession=startSession.bind(this)
       this.updateIpLimits()
-      setInterval(this.updateIpLimits,10000)
+      setInterval(this.updateIpLimits,60000)
 	                            	
 
     }
 
-    startSession(){
-
-
-    
-	                     setInterval(this.tick,20)
-
-    
-
+    componentWillReceiveProps(nextProps){
+      nextProps.elapsed!== this.state.elapsed ? this.setState({elapsed:nextProps.elapsed}):null
     }
 
-    componentDidMount(){
-    	this.startSession()
-    }
+
     
     addSuccess(){
     	this.setState({success:this.state.success+1})
@@ -75,13 +66,6 @@ class Logger extends Component{
 
 
 
-    tick(){
-
-        // This function is called every 50 ms. It updates the 
-        // elapsed counter. Calling setState causes the component to be re-rendered
-
-        this.setState({elapsed: new Date() - this.props.start});
-    }
 
 
     render(){

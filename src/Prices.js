@@ -28,7 +28,7 @@ class Prices extends Component{
 
             this.getPrices(Object.keys( this.state.Currencies).map((k,i)=> k==i && this.state.Currencies[k].isChecked ? this.state.Currencies[k][k] : '') )
         }
-	                  this.timer=  setInterval(launcher,15000)
+	                  this.timer=  setInterval(launcher,60000)
     }
 
 	componentWillReceiveProps(nextProps) {

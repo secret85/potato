@@ -3,17 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "ajv": "^6.0.0",
     "bootstrap": "^4.0.0",
+    "chart.js": "^1.1.1",
     "jquery": "^3.3.1",
-    "popper": "1.14.1",
+    "moment": "^2.20.1",
     "popper.js": "^1.14.1",
     "react": "^16.2.0",
+    "react-chartjs": "^1.2.0",
     "react-dom": "^16.2.0",
+    "react-i18next": "^7.5.1",
+    "react-moment": "^0.7.0",
     "react-scripts": "1.1.1",
     "react-tabs-redux": "^2.0.1"
   },
   "peerDependencies": {
-    "popper": "1.14.1"
+    "popper": "1.14.1",
+    "ajv": "^6.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,0 +1,33 @@
+{   
+	"tabs": {
+		"titles": {
+			"tab1": "News",
+			"tab2": "Prices",
+			"tab3": "Exchanges",
+			"tab4": "Charts"
+		},
+		"tab2": {
+				"btclp": "BTC live prices","ethlp": "ETH live prices"
+			},
+
+		"tab4": {
+				"select": "Select a pair"
+			},
+
+	    "tab1":{
+           "toggleCheck":"Check/Uncheck all","readmore":"read more"
+	    }
+		
+	},
+	"welcome":"Welcome to Potato",
+	"AppTitle": "Potato",
+	"showLogger": "Show/Hide Status Logger",
+	"language": "Lang",
+	"sec":"Seconds",
+	"languages":{
+      "ar":"عربي",
+      "en":"English"
+
+
+	}
+}

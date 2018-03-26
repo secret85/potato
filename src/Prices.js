@@ -8,16 +8,16 @@ class Prices extends Component{
     constructor(props){
 
       super(props)
-
+      this.timer=null;
       this.state={
-      	prices:{BTC:{},ETH:{}}, status:this.props.status, 
-      	providers:[{0:"USD",isChecked:true},{1:"EUR",isChecked:true},{2:"GBP",isChecked:true},{3:"JPY",isChecked:true},{4:"CNY",isChecked:true}]      }
+      	prices:{BTC:{},ETH:{}}, status:this.props.status,i18n:this.props.i18n, 
+      	Currencies:[{0:"USD",isChecked:true},{1:"EUR",isChecked:true},{2:"GBP",isChecked:true},{3:"JPY",isChecked:true},{4:"CNY",isChecked:true}]      }
       this.getPrices=this.getPrices.bind(this)
        this.startLiveTracking=this.startLiveTracking.bind(this)
-       this.updateSelectedProviders=this.updateSelectedProviders.bind(this)
+       this.updateSelectedCurrencies=this.updateSelectedCurrencies.bind(this)
        this.loadData=this.loadData.bind(this)
-      this.getPrices(Object.keys( this.state.providers).map((k,i)=> k==i && this.state.providers[k].isChecked ? this.state.providers[k][k] : '') )
-      this.startLiveTracking()
+      this.getPrices(Object.keys( this.state.Currencies).map((k,i)=> k==i && this.state.Currencies[k].isChecked ? this.state.Currencies[k][k] : '') )
+      
 
      }
 
@@ -26,9 +26,9 @@ class Prices extends Component{
        let launcher=()=>{
             this.setState({fading: true});
 
-            this.getPrices(Object.keys( this.state.providers).map((k,i)=> k==i && this.state.providers[k].isChecked ? this.state.providers[k][k] : '') )
+            this.getPrices(Object.keys( this.state.Currencies).map((k,i)=> k==i && this.state.Currencies[k].isChecked ? this.state.Currencies[k][k] : '') )
         }
-	                    setInterval(launcher,15000)
+	                  this.timer=  setInterval(launcher,15000)
     }
 
 	componentWillReceiveProps(nextProps) {
@@ -36,21 +36,23 @@ class Prices extends Component{
             
 	   	if(nextProps.status !== this.state.status){
 	      	this.setState({status:nextProps.status})
-            let currencies=this.getPrices(Object.keys( this.state.providers).map((k,i)=> k==i && this.state.providers[k].isChecked ? this.state.providers[k][k] : '')  )
+            let currencies=this.getPrices(Object.keys( this.state.Currencies).map((k,i)=> k==i && this.state.Currencies[k].isChecked ? this.state.Currencies[k][k] : '')  )
             console.log(this.state.prices)
 	      	nextProps.status==true? currencies : null
 	      }
-	    // if(nextProps.news !== this.state.news){
-	    // 	console.log(nextProps.news[0])
-	    // 	console.log(nextProps.status)
-
-	    //   	this.setState({news:nextProps.news})
-
-	    //   }
-
-
 	   
 	  }
+	componentDidMount(){
+
+        this.startLiveTracking()
+    }
+
+    componentWillUnmount(){
+
+
+        clearInterval(this.timer);
+    }
+
  
     getPrices(currencies){ //https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH&tsyms=USD,EUR,GBP, JPY,CNY
     	if(currencies.map((k,i)=>k!==''? 1 : 0).reduce((a, b) => a + b, 0)>0){
@@ -64,41 +66,31 @@ class Prices extends Component{
 	                app.setState({prices})
 	                app.setState({fading: false});
 	                
-	            	 // console.log(news[news.length-1]);
-	            	  // app.props.toggleStatus()
-	            	 // app.props.updateprices(prices)
+                app.props.logger.addApiCall('Prices',"Success","fetch prices")
+               app.props.logger.addSuccess()
 
-	                    // var salt=data.salt;
-	                    // salt["body"]=JSON.stringify({"body":"(#@#^&,)" })
-	                    
-	                    // var i=0;
-	                    // var p=(id)=>{
-	                    //   if(i ==data.msg.length) 
-	                    //     clearInterval(id)
-	                    //   else
-	                    //     console.log(window.atob(data.msg[i]));
-	                    //     i++;
-	                    // }
-	                    // setInterval(p,3000)
 
-	                }) ;
-	              }).catch(function(err){console.log(err)})
+                }) ;
+              }).catch(function(err){
+                app.props.logger.addFailure()
+                app.props.logger.addApiCall('Prices',err,"fetch prices")
+              })
 	       }else{
 	       	//this.logger.put('no results!')
 	       }
     }
-    updateSelectedProviders(e){
+    updateSelectedCurrencies(e){
      e.preventDefault()
      e.stopPropagation()
      let checkbox=e.target;
      let index =checkbox.dataset.index;
-     let providers=this.state.providers
+     let Currencies=this.state.Currencies
       
-     providers[index].isChecked= ! providers[index].isChecked
-     console.log(providers);
-     this.setState({providers})
+     Currencies[index].isChecked= ! Currencies[index].isChecked
+     console.log(Currencies);
+     this.setState({Currencies})
      this.props.toggleStatus()
-      // this.getPrices(providers.map((p,i)=>{return p.key}));
+      // this.getPrices(Currencies.map((p,i)=>{return p.key}));
     }
     
     loadData(EC){
@@ -123,6 +115,7 @@ class Prices extends Component{
     }
     render(){
         let app=this; 
+        let {i18n}=this.state
 
 
 
@@ -130,21 +123,21 @@ class Prices extends Component{
     	<div className="container-fluid"> 
 	    	<div className="col-md-12 ">
 	    	    <div className="row">
-	    	     <ul className="providers" style={{columnCount: Math.round(this.state.providers.length/2)}}>
-	              {  this.state.providers.map((provider,index)=>{
+	    	     <ul className="providers" style={{columnCount: Math.round(this.state.Currencies.length/2)}}>
+	              {  this.state.Currencies.map((currency,index)=>{
                         let key=Math.random()
-    	                let isChecked= provider.isChecked ? "checked" : null
-    	                if (this.state.providers.length >0){
+    	                let isChecked= currency.isChecked ? "checked" : null
+    	                if (this.state.Currencies.length >0){
 		                        return(
 		                        <li key={key}>
 		                           <input ref={`cb-${index+1}`} type="checkbox" 
-		                           className="provider" data-index={index} checked={isChecked} 
-		                           onChange={app.updateSelectedProviders} />
+		                           className="currency" data-index={index} checked={isChecked} 
+		                           onChange={app.updateSelectedCurrencies} />
 		                           
-		                           <span >{provider[index]}</span>
+		                           <span >{currency[index]}</span>
 		                        </li>
 		                        )
-                        }else{return(<p>no providers selected</p>)}
+                        }else{return(<p>no Currencies selected</p>)}
 	                })
 	              }
 	              </ul>
@@ -154,14 +147,14 @@ class Prices extends Component{
 	    	    <div className='row'>
 		    	    <div className="col-md-6 ">
 		                  <ul className="prices">
-			                  BTC live Prices
+			                  {i18n.t('tabs.tab2.btclp')}
 			                  {this.loadData('BTC')}
 		                  </ul>
 	                </div>
 	                <div className="col-md-6 ">
 	            
 		                <ul className="prices">
-		                ETH live Prices 
+		                {i18n.t('tabs.tab2.ethlp')}
 			    	    {this.loadData('ETH')}
 			    	   </ul>
     	            </div>

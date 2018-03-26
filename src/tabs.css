@@ -1,10 +1,16 @@
-.tabs-1{height:1.5em; width:100%;font-size: 28px;}
+.tabs-1{height:1.5em; width:100%;font-size: 24px;}
+@media only screen and (max-width:800px){
+
+.tabs{margin-top:12em;padding-top: 21em}
+.tabs-1{font-size: 12px;}
+}
 .tabs-2{height:1em; width:100%;font-size: 18px;}
 .tabs {
     width: 90%;
     display: inline-block;
     margin:1em;
     vertical-align: top;
+    margin-top:10em;
 }
 
 .tabs-1 .tab-links {

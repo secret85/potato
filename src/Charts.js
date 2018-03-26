@@ -86,7 +86,6 @@ class Charts extends Component{
             // src=="histohour" ? this.setState({data:[]} : "" ;//reset 
 	    	let url=`https://min-api.cryptocompare.com/data/${src}?aggregate=${period}&fsym=${currency1}&tsym=${currency2}&limit=10`
 	        let app=this;
-	        console.log(url)
 	        fetch(url) 
 	        .then(  
 	            function(mixture) {mixture.json().then(function(response){
@@ -151,7 +150,7 @@ class Charts extends Component{
                <div className="row">
                   <span className="white"></span>
                   <select onChange={this.handleOnChange} >
-                  <option>{i18n.t('tabs.tab4.select')}</option>
+                  <option>{i18n.t('tabs.tab1.select')}</option>
                     {pairs}
                   </select>
 

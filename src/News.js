@@ -159,7 +159,7 @@ class News extends Component{
                      <div className="col-md-5" ><img className="img-responsive square"  src={item.imageurl} /> </div>
                      <div className="col-md-4">
                        <a className="no-decoration" href={item.url}><h6>{item.title}</h6></a> 
-                       <p className="shortened">{item.body.substring(0, 70)+'...'}<a className="no-decoration" href={item.url}>{i18n.t('tabs.tab1.readmore')}</a></p>
+                       <p className="shortened">{item.body.substring(0, 70)+'...'}<a className="no-decoration" href={item.url}>{i18n.t('tabs.tab4.readmore')}</a></p>
                        <span className="blue"><label className="dark">Source:</label> {item.source}</span>
                      </div>
                    </div>
@@ -170,7 +170,7 @@ class News extends Component{
     	<div className="container-fluid"> 
     	  <div className="col-md-12 ">
     	  <div className="row">
-    	  <button onClick={(e)=>this.toggleCheckBoxes(e,true)} >{i18n.t('tabs.tab1.toggleCheck')}</button>
+    	  <button onClick={(e)=>this.toggleCheckBoxes(e,true)} >{i18n.t('tabs.tab4.toggleCheck')}</button>
     	   
     	    <ul className="providers" style={{columnCount: Math.round(providers.length/5)}}>{providers} </ul>
     	  </div>

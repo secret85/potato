@@ -106,10 +106,8 @@ class Logger extends Component{
     
 	            <div className="col-md-12">
 	                <div className="row">
-	                    <div className="col-md-2">
-                       <Session sec={i18n.t("sec")} />
-	                    </div>
-	                    <div className="col-md-2">
+
+	                    <div className="col-md-3">
 	                    Calls Left:
 		                    <ul className="twoCol"
 
@@ -121,9 +119,12 @@ class Logger extends Component{
 		                    </ul>
 	                    </div>
 
-	                    <div className="col-md-4" style={{overflow:'auto',height:'10em'}}>
+	                    <div className="col-md-7" style={{height:'11em'}}>
 	                        <ul className="ul-flat " style={{fontSize:'12px'}}> {apiCalls} </ul>
 	                    </div>
+                      <div className="col-md-1 xsmall">
+                       <Session sec={i18n.t("sec")} />
+                      </div>
 	                </div>
 
 	            </div>

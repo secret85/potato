@@ -61,14 +61,18 @@ class Exchanges extends Component{
 	                NewEx.length >0 ? oldEx.push(NewEx) : null
 	                app.setState({exchanges:oldEx})
 	                app.props.updateExchanges(oldEx)
+	                if(app.props.logger!== undefined){
                     app.props.logger.addApiCall('Exchanges',"Success","fetch exchanges")
                     app.props.logger.addSuccess()
+                }
 
 
                 }) ;
               }).catch(function(err){
+              	if(app.props.logger!== undefined){
                 app.props.logger.addFailure()
                 app.props.logger.addApiCall('Exchanges',err,"fetch exchanges")
+            }
               })
 
     }

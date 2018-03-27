@@ -96,11 +96,20 @@ class Charts extends Component{
 	                
                        
                     app.setState({data})
+                    if(app.props.logger!== undefined){
+                    app.props.logger.addApiCall('Charts',"Success",currency1+"-"+currency2+">"+period+"-"+src)
+                    app.props.logger.addSuccess()
+                  }
 	                               
 
 
 	                }) ;
-	              }).catch(function(err){console.log(err)})
+	              }).catch(function(err){
+                  if(app.props.logger!== undefined){
+                    app.props.logger.addApiCall('Exchanges',err,currency1+"-"+currency2+"-"+src)
+                    app.props.logger.addFailure()
+                  }
+                })
 
 
       }

@@ -165,7 +165,7 @@ class App extends Component {
 
             <div className="content" style={{height:'auto',width:'100%'}}>
                 <TabContent for="tab1"  >
-                  <Chart i18n={this.state.i18n} />
+                  <Chart i18n={this.state.i18n} logger={this.refs.logger}/>
                 </TabContent>
                 <TabContent for="tab2">
                     <Prices     

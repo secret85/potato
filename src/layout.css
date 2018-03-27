@@ -20,7 +20,7 @@ html, body {width:100%;height:100%;margin:0;padding:0;}
   columns: 3;
   -webkit-columns: 3;
   -moz-columns: 3;
-  font-size: 10px
+  font-size: 16px
 }
 li.apicalls{
 	margin: 2px;padding: 2px;border:none;

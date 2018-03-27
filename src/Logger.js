@@ -1,4 +1,5 @@
 import React,{Component} from 'react'
+import Session from './Session'
 class Logger extends Component{
 
     constructor(props){
@@ -7,7 +8,7 @@ class Logger extends Component{
 
       this.state={
         // data:[],options:[] status:this.props.status
-        elapsed:this.props.elapsed,success:10,failures:0,i18n:this.props.i18n,
+        elapsed:0,success:10,failures:0,i18n:this.props.i18n,
         apiCalls:[{src:"App",status:"preparing",description:"..."}],ipLimits:{CallsLeft:{}},
         Currencies:{}
 
@@ -15,17 +16,19 @@ class Logger extends Component{
       this.addFailure=this.addFailure.bind(this)
       this.addSuccess=this.addSuccess.bind(this)
       this.updateIpLimits=this.updateIpLimits.bind(this)
-      // this.startSession=startSession.bind(this)
       this.updateIpLimits()
       setInterval(this.updateIpLimits,60000)
+        
+      
 	                            	
 
     }
 
-    componentWillReceiveProps(nextProps){
-      nextProps.elapsed!== this.state.elapsed ? this.setState({elapsed:nextProps.elapsed}):null
-    }
+    // componentWillReceiveProps(nextProps){
+    //   nextProps.elapsed!== this.state.elapsed ? this.setState({elapsed:nextProps.elapsed}):null
+    // }
 
+   componentDidMount(){}
 
     
     addSuccess(){
@@ -71,10 +74,7 @@ class Logger extends Component{
     render(){
 
     	            let {i18n}=this.state
-                           
-			        let elapsed = Math.round(this.state.elapsed / 100);
 
-			        let seconds = (elapsed / 10).toFixed(1); 
 			        
 			        let data=Object.keys(this.state.ipLimits.CallsLeft).map((k,i)=>{
                           return(
@@ -107,8 +107,7 @@ class Logger extends Component{
 	            <div className="col-md-12">
 	                <div className="row">
 	                    <div className="col-md-2">
-	                       <span className="white">Session:</span>
-	                       <span className="green">{seconds}{i18n.t("sec")}</span>
+                       <Session sec={i18n.t("sec")} />
 	                    </div>
 	                    <div className="col-md-2">
 	                    Calls Left:

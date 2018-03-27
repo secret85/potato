@@ -158,8 +158,10 @@ class Charts extends Component{
                 <div className="row blue">
                 {selectedPair.join("-->")}
                 </div>
-                <div className="row">
-      		    <LineChart data={dataset}  width='600' height='250'/>
+                <div className="row ">
+                <div className="col-md-6 col-xs-10 centered" style={{margin:"auto 10%"}} >
+      		    <LineChart data={dataset}  width='auto' height='250'/>
+              </div>
       		    </div>
              </div>
       		)

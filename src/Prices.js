@@ -37,7 +37,6 @@ class Prices extends Component{
 	   	if(nextProps.status !== this.state.status){
 	      	this.setState({status:nextProps.status})
             let currencies=this.getPrices(Object.keys( this.state.Currencies).map((k,i)=> k==i && this.state.Currencies[k].isChecked ? this.state.Currencies[k][k] : '')  )
-            console.log(this.state.prices)
 	      	nextProps.status==true? currencies : null
 	      }
 	   
@@ -65,15 +64,19 @@ class Prices extends Component{
 	            function(mixture) {mixture.json().then(function(prices){
 	                app.setState({prices})
 	                app.setState({fading: false});
-	                
+
+	             if(app.props.logger!== undefined){
                 app.props.logger.addApiCall('Prices',"Success","fetch prices")
                app.props.logger.addSuccess()
+             }
 
 
                 }) ;
               }).catch(function(err){
+                  if(app.props.logger!== undefined){
                 app.props.logger.addFailure()
                 app.props.logger.addApiCall('Prices',err,"fetch prices")
+              }
               })
 	       }else{
 	       	//this.logger.put('no results!')

@@ -10,7 +10,7 @@ class News extends Component{
       super(props)
 
       this.state={
-      	news:this.props.news, status:this.props.status, providers:[] ,i18n:this.props.i18n     }
+        news:this.props.news, status:this.props.status, providers:[] ,i18n:this.props.i18n     }
       this.getNews=this.getNews.bind(this)
       this.getProviders=this.getProviders.bind(this)
        this.updateSelectedProviders=this.updateSelectedProviders.bind(this)
@@ -20,49 +20,49 @@ class News extends Component{
 
 
 
-	componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps) {
 
             
-	   	if(nextProps.status !== this.state.status){
-	      	this.setState({status:nextProps.status})
+      if(nextProps.status !== this.state.status){
+          this.setState({status:nextProps.status})
              
-	      	nextProps.status==true? this.getNews(this.state.providers.map((p,i)=>p.isChecked? p.key: '')) : null
-	      }
-	    if(nextProps.news !== this.state.news){
+          nextProps.status==true? this.getNews(this.state.providers.map((p,i)=>p.isChecked? p.key: '')) : null
+        }
+      if(nextProps.news !== this.state.news){
 
-	      	this.setState({news:nextProps.news})
+          this.setState({news:nextProps.news})
 
-	      }
+        }
     }
   componentDidMount(){ 
     this.getProviders()
   }
 
 
-	   
-	  
+     
+    
     toggleCheckBoxes(e,para){
-    	
-    	
-    	Object.keys(this.refs).map((cb,i)=>{
+      
+      
+      Object.keys(this.refs).map((cb,i)=>{
 
-    		ReactTestUtils.Simulate.change(this.refs[cb],{"checked": para});
+        ReactTestUtils.Simulate.change(this.refs[cb],{"checked": para});
 
 
-    	})
+      })
     }
     getProviders(){
-    	  let app=this;
+        let app=this;
         fetch('https://min-api.cryptocompare.com/data/news/providers') 
         .then(  
             function(mixture) {mixture.json().then(function(data){
-            	let providers=data.map(function(provider,index){
-            		return(
+              let providers=data.map(function(provider,index){
+                return(
                         {key:provider.key,img:provider.image,isChecked:true}
-            			)
-            	})
+                  )
+              })
               app.setState({providers})
-            	app.props.toggleStatus()
+              app.props.toggleStatus()
 
               app.props.logger.addApiCall('News',"Success","fetch providers")
               app.props.logger.addSuccess()
@@ -82,15 +82,15 @@ class News extends Component{
       let bool=false;
          for(var i=0;i<arr.length;i++){
              if(arr[i] !== "")   
-                return true;
+                 bool=true;
          }
    return bool;
 
     }
     getNews(feeds){
       if(feeds =="all" || this.noEmpty(feeds)){
-    	  let url=""
-    	  feeds=="all"? url="https://min-api.cryptocompare.com/data/news/?lang=EN" : url=`https://min-api.cryptocompare.com/data/news/?feeds=${feeds.join(',')}`
+        let url=""
+        feeds=="all"? url="https://min-api.cryptocompare.com/data/news/?lang=EN" : url=`https://min-api.cryptocompare.com/data/news/?feeds=${feeds.join(',')}`
         let app=this;
         
         fetch(url) 
@@ -98,8 +98,8 @@ class News extends Component{
             function(mixture) {mixture.json().then(function(news){
                 app.setState({news})
 
-            	  app.props.toggleStatus()
-            	 app.props.updateNews(news)
+                app.props.toggleStatus()
+               app.props.updateNews(news)
                 app.props.logger.addApiCall('News',"Success","fetch news")
                app.props.logger.addSuccess()
 
@@ -133,9 +133,9 @@ class News extends Component{
         let app=this;
         let {i18n}=this.state 
         const providers= this.state.providers.map(function(provider,index){
-    	  let key=Math.random()
-    	  let isChecked= provider.isChecked ? "checked" : null
-    	  
+        let key=Math.random()
+        let isChecked= provider.isChecked ? "checked" : null
+        
            return(
             
             
@@ -146,12 +146,12 @@ class News extends Component{
             
 
 
-           	)
+            )
     })
 
         let news=this.state.news.map(function(item,index){
             let key=Math.random()
-        	return (
+          return (
                
                 <div key={key} id={item.id} className="item-container">
                    <div className="row">
@@ -164,21 +164,21 @@ class News extends Component{
                      </div>
                    </div>
                 </div>
-        		)
+            )
         });
-    	return(
-    	<div className="container-fluid"> 
-    	  <div className="col-md-12 ">
-    	  <div className="row">
-    	  <button onClick={(e)=>this.toggleCheckBoxes(e,true)} >{i18n.t('tabs.tab4.toggleCheck')}</button>
-    	   
-    	    <ul className="providers" style={{columnCount: Math.round(providers.length/5)}}>{providers} </ul>
-    	  </div>
-    	  <div className="row"> {news} </div>
+      return(
+      <div className="container-fluid"> 
+        <div className="col-md-12 ">
+        <div className="row">
+        <button onClick={(e)=>this.toggleCheckBoxes(e,true)} >{i18n.t('tabs.tab4.toggleCheck')}</button>
+         
+          <ul className="providers" style={{columnCount: Math.round(providers.length/5)}}>{providers} </ul>
+        </div>
+        <div className="row"> {news} </div>
 
           </div>
-    	</div>
-    	)
+      </div>
+      )
     }
    
 

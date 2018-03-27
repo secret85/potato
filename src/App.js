@@ -32,7 +32,7 @@ class App extends Component {
     super(props)
 
      this.i18n= new i18n_();
-     this.startDate=Date.now()
+     // this.startDate=Date.now()
 
     this.state={
        i18n:this.i18n,
@@ -51,17 +51,13 @@ class App extends Component {
 
     this.toggleLogger=this.toggleLogger.bind(this)
     this.setLocale=this.setLocale.bind(this)
-    this.tick=this.tick.bind(this)
-    setInterval(this.tick,20)
+
 
 
   }
 
 
-  tick(){
 
-              this.setState({elapsed: Date.now() - this.startDate})
-     }
 
 
   toggleLogger(e){
@@ -143,7 +139,7 @@ class App extends Component {
 
            <div className="col-md-8 " >
             <div style={{display:this.state.loggerIsShown}}>
-              <Logger i18n={this.state.i18n} ref={"logger"} elapsed={this.state.elapsed} />
+              <Logger i18n={this.state.i18n} ref={"logger"}  />
             </div>
            </div>
           </div>
@@ -181,7 +177,7 @@ class App extends Component {
                 </TabContent>
                 <TabContent for="tab3">
                     <Exchanges
-                      i18n={this.state.i18n}
+                      i18n={this.state.i18n}  
                       logger={this.refs.logger}
                       status={this.state.shouldUpdateExchanges} 
                       toggleStatus={this.ToggleShouldUpdateExchanges}

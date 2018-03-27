@@ -148,13 +148,13 @@ class Prices extends Component{
 	    	       
 	    	    </div>
 	    	    <div className='row'>
-		    	    <div className="col-md-6 ">
+		    	    <div className="col-md-6 col-sm-6 col-6">
 		                  <ul className="prices">
 			                  {i18n.t('tabs.tab2.btclp')}
 			                  {this.loadData('BTC')}
 		                  </ul>
 	                </div>
-	                <div className="col-md-6 ">
+	                <div className="col-md-6 col-sm-6 col-6">
 	            
 		                <ul className="prices">
 		                {i18n.t('tabs.tab2.ethlp')}

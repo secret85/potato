@@ -17,9 +17,9 @@ html, body {width:100%;height:100%;margin:0;padding:0;}
 }
 .twoCol{
   list-style-type: none;
-  columns: 2;
-  -webkit-columns: 2;
-  -moz-columns: 2;
+  columns: 3;
+  -webkit-columns: 3;
+  -moz-columns: 3;
   font-size: 10px
 }
 li.apicalls{
